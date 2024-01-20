@@ -1,18 +1,27 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    this is my home page
+  </div>
+  <div class="error">
+    {{ error }}
+  </div>
+  <div v-for="playList in documents" :key="playList.id">
+    <p>{{ playList.title }}</p>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import getCollection from '@/composables/getCollection';
+
 
 export default {
-  name: 'HomeView',
-  components: {
-    HelloWorld
+  // name: 'Home',
+  setup() {
+    const {error, documents} = getCollection("playLists");
+    
+    console.log(documents.value);
+
+    return {error, documents}
   }
 }
 </script>
