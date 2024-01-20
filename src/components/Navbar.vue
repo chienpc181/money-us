@@ -8,7 +8,7 @@
                 </router-link>
             </h2>
             <div class="links">
-                <router-link class="play-list" v-if="user" :to="{name: 'create-play-list'}">Create Playlist</router-link>
+                <router-link class="play-list" v-if="user" :to="{name: 'create-playlist'}">Create Playlist</router-link>
                 
                 <div v-if="user" class="welcome">
                     <span>Welcome </span>

@@ -16,6 +16,7 @@
 import { ref } from 'vue';
 import useStorage from '@/composables/useStorage';
 import useCollection from '@/composables/useCollection';
+import getUser from '@/composables/getUser';
 
 export default {
     setup() {
@@ -25,15 +26,17 @@ export default {
         const fileError = ref(null);
         const {url, filePath, error, uploadFile} = useStorage();
         const {addDocument} = useCollection("playLists");
+        const currentUser = getUser();
         const handleSubmit = async () => {
             if (file.value) {
                 await uploadFile(file.value);
-                // console.log(url.value);
                 await (addDocument({
                     title: title.value,
                     description: description.value,
                     url: url.value,
-                    filePath: filePath.value
+                    filePath: filePath.value,
+                    userId: currentUser.value.uid,
+                    userName: currentUser.value.displayName
                 }))
 
             }
