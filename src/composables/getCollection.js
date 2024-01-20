@@ -7,34 +7,11 @@ const getCollection = (col) => {
   const documents = ref(null)
   const error = ref(null)
 
-  // // register the firestore collection reference
-  // let collectionRef = projectFirestore.collection(collection)
-  //   .orderBy('createdAt')
-
-  // const unsub = collectionRef.onSnapshot(snap => {
-  //   let results = []
-  //   snap.docs.forEach(doc => {
-  //     // must wait for the server to create the timestamp & send it back
-  //     doc.data().createdAt && results.push({...doc.data(), id: doc.id})
-  //   });
-    
-  //   // update values
-  //   documents.value = results
-  //   error.value = null
-  // }, err => {
-  //   console.log(err.message)
-  //   documents.value = null
-  //   error.value = 'could not fetch the data'
-  // })
-
-  // const q = query(collection(projectFirestore, col), orderBy('createdAt'));
-  const unsub = onSnapshot(collection(projectFirestore, col), (querySnapShot) => {
+  const q = query(collection(projectFirestore, col), orderBy('createdAt'));
+  const unsub = onSnapshot(q, (querySnapShot) => {
       let results = [];
       querySnapShot.forEach(doc => {
-        // must wait for the server to create the timestamp & send it back
-        // doc.data().createdAt && results.push({...doc.data(), id: doc.id});
-        results.push({...doc.data(), id: doc.id});
-        // console.log(doc.data())
+        doc.data().createdAt && results.push({...doc.data(), id: doc.id});
       });
       
       // update values
