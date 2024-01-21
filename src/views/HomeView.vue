@@ -1,6 +1,6 @@
 <template>
   <div>
-    this is my home page
+    My playlists
   </div>
   <ListView :playLists="documents" :error="error"/>
 </template>

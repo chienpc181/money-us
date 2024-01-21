@@ -1,6 +1,17 @@
 <template>
-    <div v-if="document">
-        <h2>{{ document.title }}</h2>
+    <div v-if="playlist" class="playlist-details">
+        
+        <div class="playlist-info">
+            <div class="cover">
+                <img :src="playlist.url" alt="missing img">
+            </div>
+            <h2>{{ playlist.title }}</h2>
+            <p class="username">Created by {{ playlist.userName }}</p>
+            <p class="description">{{ playlist.description }}</p>
+        </div>
+        <div class="song-list">
+            <p>song list here...</p>
+        </div>
     </div>
     
 </template>
@@ -14,12 +25,35 @@ export default {
     props: ['id'],
     
     setup(props) {
-        const {error, document} = getDocument("playLists", props.id);
+        const {error, document: playlist} = getDocument("playLists", props.id);
 
-        return {document};
+        return {playlist};
     }
 }
 </script>
 <style scoped>
-
+    .playlist-details {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: 80px;
+    }
+    .cover {
+        overflow: hidden;
+        border-radius: 20px;
+        position: relative;
+        padding: 160px;
+    }
+    .cover img {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        max-width: 150%;
+        max-height: 150%;
+        min-width: 100%;
+        min-height: 100%;
+    }
+    .playlist-info {
+        text-align: center;
+    }
 </style>

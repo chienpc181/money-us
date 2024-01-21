@@ -6,16 +6,19 @@
                 <router-link :to="{name: 'home'}">
                     Money-us
                 </router-link>
+                <router-link class="play-list" v-if="user" :to="{name: 'create-playlist'}">
+                    <font-awesome-icon icon="circle-plus" />
+                </router-link>
             </h2>
             <div class="links">
-                <router-link class="play-list" v-if="user" :to="{name: 'create-playlist'}">Create Playlist</router-link>
-                
                 <div v-if="user" class="welcome">
-                    <span>Welcome </span>
                     <span class="username">{{ user.displayName }}</span>
                 </div>
                 <div class="action">
-                    <button v-if="user" @click="handleLogout">Logout</button>
+                    <button v-if="user" @click="handleLogout">
+                        <font-awesome-icon icon="fa-solid fa-sign-out" />
+                        <!-- <font-awesome-icon icon="sign-out" /> -->
+                    </button>
                     <router-link class="btn" v-if="!user" :to="{name: 'signup'}">Signup</router-link>
                     <router-link class="btn" v-if="!user" :to="{name: 'login'}">Log in</router-link>
                 </div>
@@ -28,7 +31,8 @@
 <script>
 import router from '@/router';
 import useLogout from '../composables/useLogout';
-import getUser from '../composables/getUser'
+import getUser from '../composables/getUser';
+
 
 export default {
 setup() {
@@ -65,6 +69,8 @@ setup() {
     }
     nav .links {
         margin-left: auto;
+        display: flex;
+        align-items: center;
     }
     nav .links a, button {
         margin-left: 8px;
@@ -88,6 +94,7 @@ setup() {
     .links .action {
         display: flex;
         justify-content: center;
+        margin-left: -10px;
     }
 
     .links .action button {
