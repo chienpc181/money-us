@@ -1,5 +1,5 @@
 <template>
-    <div class="navbar">
+    <div class="my-navbar">
         <nav>
             <img src="@\assets\money-us-logo.png" >
             <h2>
@@ -52,7 +52,7 @@ setup() {
 </script>
 
 <style scoped>
-    .navbar {
+    .my-navbar {
         padding: 16px 8px;
         margin-bottom: 40px;
         background: white;

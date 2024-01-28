@@ -1,6 +1,5 @@
 <template>
     <div v-if="playlist" class="playlist-details">
-        
         <div class="playlist-info">
             <div class="cover">
                 <img :src="playlist.url" alt="missing img">
@@ -10,8 +9,11 @@
             <p class="description">{{ playlist.description }}</p>
         </div>
         <div class="song-list">
-            <p>song list here...</p>
+            <AddSongModal/>
+            <ListSongs :songs="songs"/>
         </div>
+        
+        <!-- <ConfirmationDialog  :action="deleteSong.action" :message="deleteSong.message" :title="deleteSong.title" :onConfirm="deleteSong.onConfirm"/> -->
     </div>
     
 </template>
@@ -20,14 +22,48 @@
 import { ref } from 'vue'
 import { useRoute } from 'vue-router'
 import getDocument from '@/composables/getDocument';
+import ConfirmationDialog from '@/components/ConfirmationDialog.vue';
+import AddSongModal from '@/components/AddSongModal.vue';
+import getCollection from '@/composables/getCollectionWithQuery';
+import ListSongs from '@/components/ListSongs.vue';
+import getUser from '@/composables/getUser';
 
 export default {
     props: ['id'],
-    
+    components: {
+        ConfirmationDialog,
+        AddSongModal,
+        ListSongs
+    },
     setup(props) {
+       
         const {error, document: playlist} = getDocument("playLists", props.id);
+        const {user} = getUser();
 
-        return {playlist};
+        const querySongs = [];
+        querySongs.push({
+            field: "playListId",
+            operator: "==",
+            value: props.id
+        })
+        querySongs.push({
+            field: "userId",
+            operator: "==",
+            value: user.value.uid
+        })
+        
+        const {error: errorLoadSongs, documents: songs} = getCollection("mySongs", querySongs);
+        
+        const deleteSong = ref({
+            action: "Delete",
+            title: "Delete song",
+            message: "Are you sure you want to delete?",
+            onConfirm: () => {
+                
+            }
+        })
+
+        return {playlist, deleteSong, songs};
     }
 }
 </script>

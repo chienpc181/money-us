@@ -1,14 +1,18 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
-import './assets/main.css'
+
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap'
+import 'bootstrap/js/dist/modal'
 import { projectAuth } from './firebase/config'
 import '@fortawesome/fontawesome-free/css/all.css'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faSignOut, faCirclePlus } from '@fortawesome/free-solid-svg-icons'
+import { faSignOut, faCirclePlus, faRemove, faPlusSquare } from '@fortawesome/free-solid-svg-icons'
+import './assets/main.css'
 
-library.add([faSignOut, faCirclePlus])
+library.add([faSignOut, faCirclePlus, faRemove, faPlusSquare])
 
 let app
 

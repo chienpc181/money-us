@@ -37,7 +37,8 @@ body {
 }
 
 a {
-    text-decoration: none;
+    text-decoration: none ;
+    color: unset ;
 }
 
 button, .btn {
@@ -92,6 +93,7 @@ input, textarea {
 .btn-submit-form {
     display: flex;
     justify-content: center;
+    color: royalblue;
 }
 
 

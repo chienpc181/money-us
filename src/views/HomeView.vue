@@ -2,17 +2,17 @@
   <div>
     My playlists
   </div>
-  <ListView :playLists="documents" :error="error"/>
+  <ListPlaylists :playLists="documents" :error="error"/>
 </template>
 
 <script>
 import getCollection from '@/composables/getCollection';
-import ListView from '@/components/ListView.vue';
+import ListPlaylists from '@/components/ListPlaylists.vue';
 
 export default {
   // name: 'Home',
   components: {
-    ListView
+    ListPlaylists
   },
   setup() {
     const {error, documents} = getCollection("playLists");

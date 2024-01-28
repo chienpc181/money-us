@@ -5,7 +5,7 @@
     <input type="password" placeholder="Your password" v-model="password" required>
     <div v-if="error" class="error">{{ error }}</div>
     <div class="btn-submit-form">
-        <button :disabled="isLoading">Log in</button>
+        <button :disabled="isLoading" type="submit">Log in</button>
     </div>
     
   </form>

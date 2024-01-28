@@ -6,7 +6,7 @@
         <input type="file" @change="handleFileChanged" >
         <div class="error" v-if="fileError">{{ fileError }}</div>
         <div class="btn-submit-form">
-            <button >Create</button>
+            <button type="submit">Create</button>
         </div>
         
     </form>
