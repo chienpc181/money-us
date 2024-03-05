@@ -3,6 +3,8 @@
     My playlists
   </div>
   <ListPlaylists :playLists="documents" :error="error"/>
+  <Button>Test prime vue</Button>
+  <InputText type="text" v-model="error"/>
 </template>
 
 <script>
