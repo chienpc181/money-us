@@ -6,7 +6,7 @@
                 <router-link :to="{name: 'home'}">
                     Money-us
                 </router-link>
-                <router-link class="play-list" v-if="user" :to="{name: 'create-playlist'}">
+                <router-link class="create-transaction" v-if="user" :to="{name: 'create-transaction'}">
                     <font-awesome-icon icon="circle-plus" />
                 </router-link>
             </h2>
@@ -110,7 +110,7 @@ setup() {
         font-size: 1.5rem;
     }
 
-    .play-list {
+    .create-transaction {
         margin-right: 16px;
     }
     

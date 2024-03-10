@@ -1,7 +1,5 @@
 <template>
-    <!-- <div class="error">
-        {{ error }}
-    </div> -->
+
     <div v-for="playList in playLists" :key="playList.id">
         <router-link :to="{name: 'playlist-details', params: {id: playList.id}}">
             <div class="single">
@@ -15,6 +13,10 @@
             </div>
         </router-link>
     </div>
+    <!-- <DataTable :value="playLists" tableStyle="min-width: 50rem">
+        <Column field="title" header="Title"></Column>
+        <Column field="description" header="Description"></Column>
+    </DataTable> -->
 </template>
 
 <script>
@@ -27,7 +29,7 @@ export default {
 }
 </script>
 <style scoped>
-    .single {
+    /* .single {
         display: flex;
         align-items: center;
         padding: 20px;
@@ -57,5 +59,5 @@ export default {
     }
     .song-number {
         margin-left: auto;
-    }
+    } */
 </style>

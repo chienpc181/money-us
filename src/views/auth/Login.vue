@@ -1,14 +1,17 @@
 <template>
-  <form @submit.prevent="handleSubmit">
-    <h2>Login</h2>
-    <input type="email" placeholder="Your email" v-model="email" required>
-    <input type="password" placeholder="Your password" v-model="password" required>
-    <div v-if="error" class="error">{{ error }}</div>
-    <div class="btn-submit-form">
-        <button :disabled="isLoading" type="submit">Log in</button>
-    </div>
-    
-  </form>
+    <Card class="login-form">
+        <template #title>Login</template>
+        <template #content>
+            <form @submit.prevent="handleSubmit" class="formgroup-block" >
+                <InputText type="text" v-model="email" required placeholder="Your email" class="mb-3"/>
+                <Password v-model="password" :feedback="false" placeholder="Your password" required class="mb-3"/>
+                <div v-if="error" class="error">{{ error }}</div>
+                <div>
+                    <Button :disabled="isLoading" type="submit" label="Log in"></Button>
+                </div>
+            </form>
+        </template>
+    </Card>
 </template>
 
 <script>
@@ -35,5 +38,9 @@ export default {
 }
 </script>
 <style scoped>
+.login-form {
+    max-width: 300px;
+    margin: 0 auto;
+}
 
 </style>

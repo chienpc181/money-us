@@ -1,14 +1,17 @@
 <template>
-    <ol class="list-group list-group-numbered">
+    <!-- <ol class="list-group list-group-numbered">
         <li class="list-group-item d-flex justify-content-between align-items-start" v-for="song in songs" :key="song.id">
             <div class="ms-2 me-auto">
                 <div class="fw-bold">{{ song.name }}</div>
                 <div>{{ song.lyrics }}</div>
             </div>
-            <!-- <span class="badge bg-primary rounded-pill">14</span> -->
             <ConfirmationDialog  :icon="'remove'" :message="deleteSong.message" :title="deleteSong.title" @confirm-action="handleDeleteSong(song.id)"/>
         </li>
-    </ol>
+    </ol> -->
+     <DataTable :value="songs" tableStyle="min-width: 50rem">
+        <Column field="name" header="Name"></Column>
+        <Column field="lyrics" header="Lyric"></Column>
+    </DataTable>
 </template>
 
 <script>

@@ -27,7 +27,7 @@ export default {
         const file = ref(null);
         const fileError = ref(null);
         const {url, filePath, error, uploadFile} = useStorage();
-        const {addDocument} = useCollection("playLists");
+        const {addDocument} = useCollection("testCollections");
         const {user} = getUser();
          
         const handleSubmit = async () => {

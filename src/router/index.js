@@ -3,7 +3,9 @@ import HomeView from '../views/HomeView.vue'
 import Login from '../views/auth/Login'
 import Signup from '../views/auth/Signup'
 import CreatePlayList from '@/views/playlists/CreatePlayList'
+import CreateTransaction from '@/views/playlists/CreateTransaction'
 import PlaylistDetails from '@/views/playlists/PlaylistDetails'
+import AllTransactions from '@/views/playlists/AllTransactions'
 
 //route guard
 import { projectAuth } from '@/firebase/config'
@@ -46,6 +48,16 @@ const routes = [
     path: '/playlists/create-playlist',
     name: 'create-playlist',
     component: CreatePlayList
+  },
+  {
+    path: '/transactions/all',
+    name: 'all-transactions',
+    component: AllTransactions
+  },
+  {
+    path: '/transactions/create-transaction',
+    name: 'create-transaction',
+    component: CreateTransaction
   },
   {
     path: '/playlists/:id',

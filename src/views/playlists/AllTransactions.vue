@@ -1,6 +1,5 @@
 <template>
-  <DataTable :value="transactions" tableStyle="min-width: 50rem" paginator :rows="10" :rowsPerPageOptions="[10, 20, 50, 100]"
-   selectionMode="single" metaKeySelection="true" dataKey="id" v-model:selection="selectedTransaction">
+    <DataTable :value="transactions" tableStyle="min-width: 50rem">
         <Column field="name" header="Name"></Column>
         <Column field="amount" header="Amount" dataType="numeric">
             <template #body="{ data }">
@@ -20,8 +19,6 @@
 <script setup>
 import getCollection from '@/composables/getCollectionWithQuery';
 import getUser from '@/composables/getUser';
-import { ref } from 'vue';
-
 
 const {user} = getUser();
 const queryTransactions = [];
@@ -49,7 +46,10 @@ const formatDate = (value) => {
         year: 'numeric'
     });
 };
-const selectedTransaction = ref();
+
 
 
 </script>
+<style scoped>
+
+</style>
