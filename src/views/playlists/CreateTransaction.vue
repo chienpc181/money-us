@@ -9,13 +9,13 @@
             <form @submit.prevent="handleSubmit" class="formgroup-block" >
                 <InputText type="text" v-model="name" required placeholder="Name" class="my-3 w-full"/>
                 <InputNumber type="text" v-model="amount" required placeholder="Amount" class="mb-3 w-full"/>
-                <Textarea v-model="description" rows="5" cols="30" placeholder="Description" class="mb-3 w-full"/>
+                <Textarea v-model="description" rows="3" cols="30" placeholder="Description" class="mb-3 w-full"/>
                 <div class="flex-auto">
-                    <Calendar v-model="transactionAt" showIcon :showOnFocus="false" dateFormat="dd/mm/yy" placeholder="At" class="mb-3 w-full" />
+                    <Calendar v-model="transactionAt" showIcon :showOnFocus="false" dateFormat="dd/mm/yy" placeholder="Date" class="mb-3 w-full" />
                 </div>
                 <Dropdown v-model="transactionType" :options="transactionTypes" optionLabel="name" placeholder="Select type" checkmark :highlightOnSelect="false" class="mb-3 w-full" />
                 <div class="mb-6">
-                    <label for="isMonthlyCost" class="mr-3"> Is monthly cost </label>
+                    <label for="isMonthlyCost" class="mr-3"> Monthly cost </label>
                     <Checkbox v-model="isMonthlyCost"  :binary="true"/>
                 </div>
 

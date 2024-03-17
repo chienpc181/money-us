@@ -1,9 +1,8 @@
 import { ref } from 'vue'
 import { projectFirestore } from '../firebase/config'
-import { addDoc, collection, deleteDoc, doc } from "firebase/firestore"
+import { addDoc, collection, deleteDoc, doc, updateDoc } from "firebase/firestore"
 
 const useCollection = (col) => {
-
   const error = ref(null);
 
   // add a new document
@@ -22,6 +21,20 @@ const useCollection = (col) => {
     }
   }
 
+  const updateDocument = async (docId, data) => {
+    error.value = null;
+    try {
+      // const docRef = await updateDoc(collection(projectFirestore, col))
+      const docRef = doc(projectFirestore, col, docId);
+
+      await updateDoc(docRef, data);
+    }
+    catch (err) {
+      console.log(err.message)
+      error.value = 'could not update document'
+    }
+  }
+
   const deleteDocument = async (col, docId) => {
     error.value = null;
 
@@ -35,7 +48,7 @@ const useCollection = (col) => {
     }
   }
 
-  return { error, addDocument, deleteDocument }
+  return { error, addDocument, updateDocument, deleteDocument }
 
 }
 
