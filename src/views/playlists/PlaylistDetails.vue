@@ -52,7 +52,7 @@ export default {
             value: user.value.uid
         })
         
-        const {error: errorLoadSongs, documents: songs} = getCollection("mySongs", querySongs);
+        const {error: errorLoadSongs, documents: songs} = getCollection("mySongs", querySongs, []);
         
         const deleteSong = ref({
             action: "Delete",

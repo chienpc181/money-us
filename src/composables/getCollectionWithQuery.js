@@ -2,7 +2,7 @@ import { ref, watchEffect } from 'vue'
 import { projectFirestore } from '../firebase/config'
 import { onSnapshot, orderBy, query, collection, where } from 'firebase/firestore'
 
-const getCollection = (col, queryModels) => {
+const getCollection = (col, queryModels, orderModels) => {
 
   const documents = ref(null)
   const error = ref(null)
@@ -10,8 +10,17 @@ const getCollection = (col, queryModels) => {
   let q = query(collection(projectFirestore, col));
   queryModels.forEach((queryModel) => {
     q = query(q, where(queryModel.field, queryModel.operator, queryModel.value));
-  })
-  q = query(q, orderBy('createdAt'));
+  });
+  
+  // q = query(q, orderBy('createdAt'));
+  orderModels.forEach((orderModel) => {
+    if (orderModel.isAscending) {
+      q = query(q, orderBy(orderModel.field));
+    }
+    else {
+      q = query(q, orderBy(orderModel.field, "desc"));
+    }
+  });
 
   const unsub = onSnapshot(q, (querySnapShot) => {
       let results = [];

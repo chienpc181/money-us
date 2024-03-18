@@ -33,7 +33,7 @@ const queryTransactions = [];
 //     value: user.value.uid
 // })
 
-const {error: errorLoadItems, documents: transactions} = getCollection("transactions", queryTransactions);
+const {error: errorLoadItems, documents: transactions} = getCollection("transactions", queryTransactions, []);
 const formatCurrency = (value) => {
     return value.toLocaleString('vn-VN', { style: 'currency', currency: 'VND' });
     // return value.toString() + "đ";

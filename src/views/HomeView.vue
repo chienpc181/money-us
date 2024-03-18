@@ -131,9 +131,18 @@ const queryTransactions = [];
 //     field: "userId",
 //     operator: "==",
 //     value: user.value.uid
-// })
+// });
+const orderTransactions = [];
+orderTransactions.push({
+    field: "transactionAt",
+    isAscending: false
+});
+orderTransactions.push({
+    field: "createdAt",
+    isAscending: false
+});
 
-const {error: errorLoadItems, documents: transactions} = getCollection("transactions", queryTransactions);
+const {error: errorLoadItems, documents: transactions} = getCollection("transactions", queryTransactions, orderTransactions);
 const formatCurrency = (value) => {
     return value.toLocaleString('vn-VN', { style: 'currency', currency: 'VND' });
 };
