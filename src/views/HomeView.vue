@@ -8,14 +8,25 @@
             </template>
 
             <template #end>
-                <FileUpload mode="basic" accept="image/*" :maxFileSize="1000000" label="Import" chooseLabel="Import"
-                    class="mr-2 inline-block" />
-                <!-- <Button label="Export" icon="pi pi-upload" severity="help" @click="exportCSV($event)"  /> -->
+                <!-- <FileUpload mode="basic" accept="image/*" :maxFileSize="1000000" label="Import" chooseLabel="Import"
+                    class="mr-2 inline-block" v-tooltip="'Import form csv file'"/> -->
+                <Button label="" icon="pi pi-upload" severity="help" @click="exportCSV($event)" v-tooltip="'Export to csv file'" />
             </template>
         </Toolbar>
-        <DataTable :value="transactions" tableStyle="min-width: 50rem" dataKey="id" paginator :rows="10"
-            :rowsPerPageOptions="[10, 20, 50, 100]" selectionMode="single" :metaKeySelection="true"
-            v-model:selection="selectedTransaction">
+        <DataTable ref="dt" :value="transactions" tableStyle="min-width: 50rem" dataKey="id" paginator :rows="10"
+             selectionMode="single" :metaKeySelection="true"
+            v-model:selection="selectedTransaction" :filters="filters">
+            <template #header>
+                <div class="flex flex-wrap gap-2 align-items-center justify-content-between">
+                    <h4 class="m-0">All transactions</h4>
+                    <IconField iconPosition="left">
+                        <InputIcon>
+                            <i class="pi pi-search" />
+                        </InputIcon>
+                        <InputText v-model="filters['global'].value" placeholder="Search..." />
+                    </IconField>
+                </div>
+            </template>
             <Column field="name" header="Name"></Column>
             <Column field="amount" header="Amount" dataType="numeric">
                 <template #body="{ data }">
@@ -104,9 +115,11 @@ import getUser from '@/composables/getUser';
 import { ref } from 'vue';
 import { useToast } from 'primevue/usetoast';
 import { timestamp } from '@/firebase/config';
+import { FilterMatchMode } from 'primevue/api';
 
 
 const toast = useToast();
+const dt = ref();
 const {addDocument, updateDocument, deleteDocument} = useCollection("transactions");
 const {user} = getUser();
 const transactionDialog = ref(false);
@@ -114,6 +127,9 @@ const deleteTransactionDialog = ref(false);
 const transaction = ref({});
 const submitted = ref(false);
 const actionTitle = ref();
+const filters = ref({
+    'global': {value: null, matchMode: FilterMatchMode.CONTAINS},
+});
 const transactionTypes = ref([
     { name: 'Decor', code: 'Decor' },
     { name: 'Foods & Drinks', code: 'FoodAndDrink' },
@@ -213,5 +229,9 @@ const createTransaction = async () => {
     submitted.value = false;
     transactionDialog.value = true;
 }
+
+const exportCSV = () => {
+    dt.value.exportCSV();
+};
 
 </script>
